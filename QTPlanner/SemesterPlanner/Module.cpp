@@ -25,7 +25,7 @@ Module::~Module()
 	if (!assess.empty())
 	{
 		for (iter = assess.begin(); iter != assess.end(); iter++)
-		{		
+		{
 			delete *iter;
 		}
 	}	
@@ -152,7 +152,7 @@ bool Module::removeAssessment(string name)
 //calculations
 bool Module::calcPassFail()
 {
-	return calcPercentage() >= passMark;
+    return calcPercentage() >= passMark;
 }
 
 float Module::calcNeedToPass()
@@ -201,25 +201,22 @@ void Module::setTimePeriod(string period)
 
 void Module::setExamEntranceMark(float EEM)
 {
-	if (EEM >= 0)
+    if (EEM >= 0)
 	{
 		this->examEntranceMark = EEM;
-	}
-//	else	??perhaps
-//	{	
-//	
-//	}
+
+    }
 }
 
 void Module::setPassMark(float pass)
 {
-	if (pass >= 0)
+    if (pass >= 0)
 	{
-		this->passMark = pass;
+        this->passMark = pass;
 	}
 	else 
 	{
-		passMark = 50;
+        passMark = 50;
 	}
 }
 
@@ -261,11 +258,6 @@ float Module::getExamEntranceMark()
 float Module::getPassMark()
 {
 	return passMark;
-}
-
-int Module::getSize()
-{
-	return assess.size();
 }
 
 //note be careful when calling this function. it may return null
@@ -310,21 +302,6 @@ string Module::toString()
 		outString += (*iter)->toString(0) + "\n";
 	}	
 	return outString;	
-}
-
-void Module::writeToFile(fstream &file)
-{
-	file << getName() << "#" << endl;
-	file << getTimePeriod() << endl;
-	file << getExamEntranceMark() << endl;
-	file << getPassMark() << endl;
-	
-	int numOfItems = assess.size();
-	file << numOfItems << endl;
-	for (iter = assess.begin(); iter != assess.end(); iter++)
-	{
-		(*iter)->writeToFile(file);
-	}	
 }
 //other
 //Module Module::clone()

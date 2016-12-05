@@ -41,7 +41,6 @@ class Assessment : public AbstractAssessment
 		float getMark();
 		float getTotal();
 		//float getWeight();	in parent class
-		int getSize();
 		AbstractAssessment * getAssessment(string name);	
 
 		float calculateTotalMark();
@@ -51,8 +50,7 @@ class Assessment : public AbstractAssessment
 		
 		//
 		void print();
-		string toString(int n);
-		void writeToFile(fstream &file);
+		string toString(int n);		
 		//if the opps are equal weight---maybe make a state boolean variable
 			//and a separate function to divide it evenly
 			//and have a total weight

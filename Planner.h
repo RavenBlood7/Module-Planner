@@ -2,26 +2,31 @@
 #define PLANNER_H
 
 #include "Module.h"
+#include <fstream>
 
 class Planner
 {
 	private:
-		Module* modules;
-		Module* modulePlans;
+		list<Module*> modules;
+		list<Module*>::iterator iter;
+		fstream file;
 		
 	public:
 		Planner();
 		~Planner();
 	
-		bool addModule(string name);
+		bool addModule(string name, string timePeriod,
+			float EEM, float passMark);
 		bool removeModule(string name);
+		Module* getModule(string name);
 	
-		bool makePlan(string name);
-		bool removePlan(string name);
-	
+		void loadFromFile();
+		void saveToFile();
+		void	populateAssessment(Assessment* cur,
+					int numSubAssess, fstream &file);	
 		//clone?
 		//Module& operator[]();
-}
+};
 
 
 #endif

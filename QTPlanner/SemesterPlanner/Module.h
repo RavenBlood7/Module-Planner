@@ -4,7 +4,6 @@
 #include "Assessment.h"
 #include "Opportunity.h"
 #include <string>
-#include <fstream>
 
 using namespace std;
 
@@ -18,6 +17,7 @@ class Module
 		//float semesterMarkWeight;	//I don't think we need this. If it is SM and Exam are just Assessments
 		float examEntranceMark;
 		float passMark;
+		//pass mark	
 		
 	public:
 		Module();
@@ -46,7 +46,6 @@ class Module
 		float getTotalWeight();
 		float getExamEntranceMark();
 		float getPassMark();
-		int getSize();
 		
 		AbstractAssessment * getAssessment(string name);
 	
@@ -54,7 +53,6 @@ class Module
 		void print();
 		string listAssessments();
 		string toString();
-		void writeToFile(fstream &file);
 		//void cvtOppToGroup(string name);
 		//Module clone();
 		//

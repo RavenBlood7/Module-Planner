@@ -2,13 +2,15 @@
 
 //void testAssessment();
 #include "testerAssessment.h"
+#include "testerModule.h"
+#include "testerPlanner.h"
 
 using namespace std;
 
 int main()
 {
-	testAssessment();
+	//testAssessment();
 	//testModule();
-	//testPlanner();
+	testPlanner();
 	return 0;
 }
