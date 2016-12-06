@@ -124,7 +124,7 @@ void testPlanner()
 	
 	mod2->print();
 */	
-	plan.loadFromFile();
+//	plan.loadFromFile();
 	Module * mod2 = plan.getModule("COS 284");	
 	mod2->print();
 	//plan.saveToFile();

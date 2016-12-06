@@ -100,3 +100,8 @@ void Opportunity::writeToFile(fstream &file)
 	file << mark << endl;
 	file << total << endl;
 }
+
+bool Opportunity::isLeaf()
+{
+	return true;
+}

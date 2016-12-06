@@ -349,6 +349,15 @@ void Assessment::print()
 	cout << toString(0);
 }
 
+void Assessment::listAssessments()
+{
+	cout << "__________" << name << "___________" << endl;
+	for (iter = opps.begin(); iter != opps.end(); iter++)
+	{
+		cout << "\t" << (*iter)->getAssessName() << endl;
+	}		
+}
+
 string Assessment::toString(int n)
 {
 	stringstream outString;
@@ -389,3 +398,8 @@ void Assessment::writeToFile(fstream &file)
 //void alphabetize()
 //int operator[](int index);
 //Assessment& clone()
+
+bool Assessment::isLeaf()
+{
+	return false;
+}

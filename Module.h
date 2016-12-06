@@ -52,7 +52,7 @@ class Module
 	
 		//
 		void print();
-		string listAssessments();
+		void listAssessments();
 		string toString();
 		void writeToFile(fstream &file);
 		//void cvtOppToGroup(string name);

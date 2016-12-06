@@ -292,14 +292,13 @@ void Module::print()
 	cout << "Total Mark : " << calcPercentage() << "%\n_________________________________\n";	
 }
 
-string Module::listAssessments()
+void Module::listAssessments()
 {
-	string outString = "";
+	cout << "__________" << name << "___________" << endl;
 	for (iter = assess.begin(); iter != assess.end(); iter++)
 	{
-		outString += (*iter)->getAssessName() + "\n";
-	}	
-	return outString;
+		cout << "\t" << (*iter)->getAssessName() << endl;
+	}
 }
 
 string Module::toString()

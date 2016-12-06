@@ -1,4 +1,5 @@
 #include "Planner.h"
+#include "Navigator.h"
 #include <fstream>
 
 ////////////////////////////////remove
@@ -7,12 +8,12 @@ using namespace std;
 
 Planner::Planner()
 {
-//	loadFromFile();
+	loadFromFile();
 }
 
 Planner::~Planner()
 {
-	//saveToFile();
+	saveToFile();
 	if (!modules.empty())
 	{
 		for (iter = modules.begin(); iter != modules.end(); iter++)
@@ -89,6 +90,11 @@ Module* Planner::getModule(string name)
 		}
 	}	
 	return 0;		
+}
+
+Navigator* Planner::createNavigator()
+{
+	return new Navigator(this);
 }
 
 //note: put in safe guards. Perhaps rather have the filename as parameter and 
@@ -188,4 +194,13 @@ void	Planner::populateAssessment(Assessment* cur, int numSubAssess, fstream &fil
 				numSubSubs, file);
 		}
 	}
+}
+
+void Planner::listModules()
+{
+	cout << "__________ROOT___________" << endl;
+	for (iter = modules.begin(); iter != modules.end(); iter++)
+	{
+		cout << (*iter)->getName() << endl;
+	}		
 }

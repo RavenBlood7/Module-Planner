@@ -35,6 +35,8 @@ class Opportunity : public AbstractAssessment
 		string toString(int n);
 		void writeToFile(fstream &file);	
 		//Assessment& clone()
+	
+		bool isLeaf();
 };
 
 

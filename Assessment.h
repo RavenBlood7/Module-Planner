@@ -52,6 +52,7 @@ class Assessment : public AbstractAssessment
 		//
 		void print();
 		string toString(int n);
+		void listAssessments();		
 		void writeToFile(fstream &file);
 		//if the opps are equal weight---maybe make a state boolean variable
 			//and a separate function to divide it evenly
@@ -61,6 +62,8 @@ class Assessment : public AbstractAssessment
 		//void alphabetize();
 		//int operator[](int index);
 		//Assessment& clone()
+		
+		bool isLeaf();
 };
 
 

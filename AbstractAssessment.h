@@ -64,6 +64,8 @@ class AbstractAssessment
 		virtual void writeToFile(fstream &file) = 0;
 		//a function to check if values are within range 0-100 percentage
 		//Assessment& clone()
+		
+		virtual bool isLeaf() = 0;
 };
 
 
