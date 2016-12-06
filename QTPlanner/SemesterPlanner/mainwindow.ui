@@ -6,84 +6,110 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>501</width>
-    <height>424</height>
+    <width>667</width>
+    <height>364</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>270</y>
-      <width>91</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>change to</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>20</y>
+      <x>230</x>
+      <y>260</y>
       <width>62</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Current:</string>
+     <string>Outputs</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>250</y>
+      <width>91</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Do Stuffs</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>40</y>
+      <width>241</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>New Item</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <italic>true</italic>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>31</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>40</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>20</y>
-      <width>91</width>
+      <x>70</x>
+      <y>10</y>
+      <width>62</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>ModuleName</string>
+     <string>Navigation</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>270</y>
-      <width>151</width>
-      <height>27</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>310</y>
-      <width>91</width>
-      <height>27</height>
+      <x>330</x>
+      <y>10</y>
+      <width>62</width>
+      <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>list</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>421</width>
-      <height>221</height>
-     </rect>
+     <string>Details</string>
     </property>
    </widget>
   </widget>
@@ -92,38 +118,10 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>501</width>
+     <width>667</width>
      <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuModule">
-    <property name="title">
-     <string>Module</string>
-    </property>
-    <addaction name="separator"/>
-    <addaction name="actionCreate"/>
-    <addaction name="actionEdite"/>
-    <addaction name="actionDelete"/>
-   </widget>
-   <widget class="QMenu" name="menuAssessment">
-    <property name="title">
-     <string>Assessment</string>
-    </property>
-    <addaction name="actionCreate_2"/>
-    <addaction name="actionEdit"/>
-    <addaction name="actionDelete_2"/>
-   </widget>
-   <widget class="QMenu" name="menuAssessment_Group">
-    <property name="title">
-     <string>Assessment Group</string>
-    </property>
-    <addaction name="actionCreate_3"/>
-    <addaction name="actionEdit_2"/>
-    <addaction name="actionDelete_3"/>
-   </widget>
-   <addaction name="menuModule"/>
-   <addaction name="menuAssessment"/>
-   <addaction name="menuAssessment_Group"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">

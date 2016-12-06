@@ -1,54 +1,22 @@
-#ifndef TESTER_MODULE_H
-#define TESTER_MODULE_H
+#ifndef TESTER_PLANNER_H
+#define TESTER_PLANNER_H
 
-#include "Module.h"
+#include "Planner.h"
+#include <iostream>
 
-void testModule()
+using namespace std;
+
+void testPlanner()
 {
-	//Try it on ENG120:make a module
-//	Module mod1("ENG120");
-//	
-//	mod1.addOpportunity("Exam", 50);
-//	mod1.addAssessment("Semester", 50, 3);
-//	Assessment * pracs = (Assessment *) mod1.getAssessment("Semester");
-//	pracs->setOpName("subSemester", "SAP Test");
-//	pracs->setOpName("subSemester", "SS Assignment");
-//	pracs->setOpName("subSemester", "HOD Test");
-//	//pracs->setOpName("subSemester", "Pracs");	
-//	
-//	pracs->setOpTotal("SAP Test", 60);
-//	pracs->setOpTotal("SS Assignment", 100);
-//	pracs->setOpTotal("HOD Test", 100);
-//	
-//	pracs->addAssessment("Pracs", 4, 40);
-	//pracs->setOpWeight("Pracs", 40);	
+	Planner plan;
+/*	plan.addModule("COS 284", "S2", 50, 40);
 	
-	//mod1.addOppToAssessment("Semester", "SAP Test", 0, 60);
-//	mod1.getAssessment("Semester")->addOpportunity("SAP Test", 0, 60);
-//	mod1.getAssessment("Semester")->addOpportunity("SS Assignment", 0, 100);
-//	mod1.getAssessment("Semester")->addOpportunity("HOD Test", 0, 100);
-//	mod1.getAssessment("Semester")->addAssessment("Pracs", 0, 40);
-///*	
-//	pracs = (Assessment *) pracs->getAssessment("Pracs");
-//	pracs->setOpName("subPracs", "P1");
-//	pracs->setOpName("subPracs", "P2");
-//	pracs->setOpName("subPracs", "P3");
-//	pracs->setOpName("subPracs", "P4");
-/*	
-	mod1.getAssessment("Semester")->getAssessment("Pracs")->addOpportunity("P1", 0, 10);
-	mod1.getAssessment("Semester")->getAssessment("Pracs")->addOpportunity("P2", 0, 10);
-	mod1.getAssessment("Semester")->getAssessment("Pracs")->addOpportunity("P3", 0, 10);
-	mod1.getAssessment("Semester")->getAssessment("Pracs")->addOpportunity("P4", 0, 10);
-//*/	
-//	mod1.print();
-
-
-//Try with 284:
-	Module mod2("COS 284");
 	
-	mod2.addAssessment("Semester Mark", 40);
+	Module * mod2 = plan.getModule("COS 284");
 	
-	Assessment * sem = (Assessment* ) mod2.getAssessment("Semester Mark");
+	mod2->addAssessment("Semester Mark", 40);
+	
+	Assessment * sem = (Assessment* ) mod2->getAssessment("Semester Mark");
 	sem->addAssessment("Class Tests",4 , 15);
 	sem->addAssessment("Pracs", 10);
 	sem->addAssessment("Assignments", 25);
@@ -151,10 +119,15 @@ void testModule()
 	ST->addOpportunity("ST2", 100, 45.0/2);	
 	ST->setOpMark("ST2", 87);
 	
-	mod2.addOpportunity("Exam", 60);
-	(Opportunity*) mod2.getAssessment("Exam")->setMark(91.586666);
+	mod2->addOpportunity("Exam", 60);
+	(Opportunity*) mod2->getAssessment("Exam")->setMark(91.586666);
 	
-	mod2.print();
+	mod2->print();
+*/	
+//	plan.loadFromFile();
+	Module * mod2 = plan.getModule("COS 284");	
+	mod2->print();
+	//plan.saveToFile();
 	
 }
 

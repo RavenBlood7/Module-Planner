@@ -90,3 +90,24 @@ string Opportunity::toString(int n)
 		<< endl;
 	return outString.str();
 }
+
+
+void Opportunity::writeToFile(fstream &file)
+{
+	file << "T" << endl;
+	file << name << "#"<< endl;
+	file << weight << endl;
+	file << mark << endl;
+	file << total << endl;
+}
+
+bool Opportunity::isLeaf()
+{
+	return true;
+}
+
+///@todo complete this!
+void Opportunity::listDetail(QListWidget* listWidget)
+{
+
+}

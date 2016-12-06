@@ -15,11 +15,9 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
@@ -40,16 +38,14 @@ public:
     QAction *actionEdit_2;
     QAction *actionDelete_3;
     QWidget *centralWidget;
-    QPushButton *pushButton;
     QLabel *label;
-    QLabel *label_2;
-    QLineEdit *lineEdit;
+    QPushButton *pushButton;
+    QListWidget *listWidget;
     QPushButton *pushButton_2;
-    QPlainTextEdit *plainTextEdit;
+    QListWidget *listWidget_2;
+    QLabel *label_2;
+    QLabel *label_3;
     QMenuBar *menuBar;
-    QMenu *menuModule;
-    QMenu *menuAssessment;
-    QMenu *menuAssessment_Group;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -57,7 +53,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(845, 544);
+        MainWindow->resize(667, 364);
         actionCreate = new QAction(MainWindow);
         actionCreate->setObjectName(QStringLiteral("actionCreate"));
         actionEdite = new QAction(MainWindow);
@@ -78,34 +74,38 @@ public:
         actionDelete_3->setObjectName(QStringLiteral("actionDelete_3"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(40, 270, 91, 27));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(40, 20, 62, 17));
-        label_2 = new QLabel(centralWidget);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(120, 20, 91, 17));
-        lineEdit = new QLineEdit(centralWidget);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setGeometry(QRect(150, 270, 151, 27));
+        label->setGeometry(QRect(230, 260, 62, 17));
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(70, 250, 91, 27));
+        listWidget = new QListWidget(centralWidget);
+        QFont font;
+        font.setBold(true);
+        font.setItalic(true);
+        font.setUnderline(true);
+        font.setWeight(75);
+        QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget);
+        __qlistwidgetitem->setFont(font);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
+        listWidget->setGeometry(QRect(70, 40, 241, 191));
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(40, 310, 91, 27));
-        plainTextEdit = new QPlainTextEdit(centralWidget);
-        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
-        plainTextEdit->setGeometry(QRect(20, 40, 421, 221));
+        pushButton_2->setGeometry(QRect(20, 40, 31, 27));
+        listWidget_2 = new QListWidget(centralWidget);
+        listWidget_2->setObjectName(QStringLiteral("listWidget_2"));
+        listWidget_2->setGeometry(QRect(330, 40, 256, 192));
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(70, 10, 62, 17));
+        label_3 = new QLabel(centralWidget);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setGeometry(QRect(330, 10, 62, 17));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 845, 25));
-        menuModule = new QMenu(menuBar);
-        menuModule->setObjectName(QStringLiteral("menuModule"));
-        menuAssessment = new QMenu(menuBar);
-        menuAssessment->setObjectName(QStringLiteral("menuAssessment"));
-        menuAssessment_Group = new QMenu(menuBar);
-        menuAssessment_Group->setObjectName(QStringLiteral("menuAssessment_Group"));
+        menuBar->setGeometry(QRect(0, 0, 667, 25));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -113,20 +113,6 @@ public:
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
-
-        menuBar->addAction(menuModule->menuAction());
-        menuBar->addAction(menuAssessment->menuAction());
-        menuBar->addAction(menuAssessment_Group->menuAction());
-        menuModule->addSeparator();
-        menuModule->addAction(actionCreate);
-        menuModule->addAction(actionEdite);
-        menuModule->addAction(actionDelete);
-        menuAssessment->addAction(actionCreate_2);
-        menuAssessment->addAction(actionEdit);
-        menuAssessment->addAction(actionDelete_2);
-        menuAssessment_Group->addAction(actionCreate_3);
-        menuAssessment_Group->addAction(actionEdit_2);
-        menuAssessment_Group->addAction(actionDelete_3);
 
         retranslateUi(MainWindow);
 
@@ -145,13 +131,18 @@ public:
         actionCreate_3->setText(QApplication::translate("MainWindow", "Create", 0));
         actionEdit_2->setText(QApplication::translate("MainWindow", "Edit", 0));
         actionDelete_3->setText(QApplication::translate("MainWindow", "Delete", 0));
-        pushButton->setText(QApplication::translate("MainWindow", "change to", 0));
-        label->setText(QApplication::translate("MainWindow", "Current:", 0));
-        label_2->setText(QApplication::translate("MainWindow", "ModuleName", 0));
-        pushButton_2->setText(QApplication::translate("MainWindow", "list", 0));
-        menuModule->setTitle(QApplication::translate("MainWindow", "Module", 0));
-        menuAssessment->setTitle(QApplication::translate("MainWindow", "Assessment", 0));
-        menuAssessment_Group->setTitle(QApplication::translate("MainWindow", "Assessment Group", 0));
+        label->setText(QApplication::translate("MainWindow", "Outputs", 0));
+        pushButton->setText(QApplication::translate("MainWindow", "Do Stuffs", 0));
+
+        const bool __sortingEnabled = listWidget->isSortingEnabled();
+        listWidget->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
+        ___qlistwidgetitem->setText(QApplication::translate("MainWindow", "New Item", 0));
+        listWidget->setSortingEnabled(__sortingEnabled);
+
+        pushButton_2->setText(QApplication::translate("MainWindow", "<", 0));
+        label_2->setText(QApplication::translate("MainWindow", "Navigation", 0));
+        label_3->setText(QApplication::translate("MainWindow", "Details", 0));
     } // retranslateUi
 
 };

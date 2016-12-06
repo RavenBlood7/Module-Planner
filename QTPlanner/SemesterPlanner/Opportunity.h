@@ -33,7 +33,11 @@ class Opportunity : public AbstractAssessment
 		//
 		void print();
 		string toString(int n);
+		void writeToFile(fstream &file);	
 		//Assessment& clone()
+	
+		bool isLeaf();
+        void listDetail(QListWidget* listWidget);
 };
 
 

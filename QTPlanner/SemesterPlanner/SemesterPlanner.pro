@@ -17,14 +17,18 @@ SOURCES += main.cpp\
     createmodule.cpp    \
     Assessment.cpp  \
     Opportunity.cpp \
-    Module.cpp
+    Module.cpp \
+    Planner.cpp \
+    Navigator.cpp
 
 HEADERS  += mainwindow.h \
     createmodule.h \
     AbstractAssessment.h \
     Assessment.h \
     Opportunity.h \
-    Module.h
+    Module.h \
+    Planner.h \
+    Navigator.h
 
 FORMS    += mainwindow.ui \
     createModule.ui \

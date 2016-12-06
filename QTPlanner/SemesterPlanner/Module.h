@@ -4,6 +4,8 @@
 #include "Assessment.h"
 #include "Opportunity.h"
 #include <string>
+#include <fstream>
+#include <QListWidget>
 
 using namespace std;
 
@@ -17,7 +19,6 @@ class Module
 		//float semesterMarkWeight;	//I don't think we need this. If it is SM and Exam are just Assessments
 		float examEntranceMark;
 		float passMark;
-		//pass mark	
 		
 	public:
 		Module();
@@ -46,16 +47,20 @@ class Module
 		float getTotalWeight();
 		float getExamEntranceMark();
 		float getPassMark();
+		int getSize();
 		
 		AbstractAssessment * getAssessment(string name);
 	
 		//
 		void print();
-		string listAssessments();
+		void listAssessments();
 		string toString();
+		void writeToFile(fstream &file);
 		//void cvtOppToGroup(string name);
 		//Module clone();
 		//
+        void displayList(QListWidget* listWidget);
+        void listDetail(QListWidget* listWidget);
 };
 
 

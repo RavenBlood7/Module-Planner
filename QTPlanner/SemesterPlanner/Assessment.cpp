@@ -85,7 +85,7 @@ bool Assessment::addOpportunity(string name, float total, float weight)
 
 bool Assessment::addOpportunity(string name, float weight)
 {
-	AbstractAssessment* newItem = new Opportunity(name, 0, weight);
+	AbstractAssessment* newItem = new Opportunity(name, 100, weight);
 	
 	iter = opps.begin();	
 	//if list isempty
@@ -284,6 +284,11 @@ float Assessment::getTotal()	//The total of all the marks will be the subweights
 	return calculateSubWeights();
 }
 
+int Assessment::getSize()
+{
+	return opps.size();
+}
+
 AbstractAssessment * Assessment::getAssessment(string name)
 {
 	for (iter = opps.begin(); iter != opps.end(); iter++)
@@ -344,6 +349,15 @@ void Assessment::print()
 	cout << toString(0);
 }
 
+void Assessment::listAssessments()
+{
+	cout << "__________" << name << "___________" << endl;
+	for (iter = opps.begin(); iter != opps.end(); iter++)
+	{
+		cout << "\t" << (*iter)->getAssessName() << endl;
+	}		
+}
+
 string Assessment::toString(int n)
 {
 	stringstream outString;
@@ -367,6 +381,41 @@ string Assessment::toString(int n)
 	return outString.str();	
 }
 
+void Assessment::writeToFile(fstream &file)
+{
+	file << "N" << endl;
+	file << name << "#" << endl;
+	file << weight << endl;
+	
+	int numOfItems = opps.size();
+	file << numOfItems << endl;
+	for (iter = opps.begin(); iter != opps.end(); iter++)
+	{
+		(*iter)->writeToFile(file);
+	}	
+}
+
 //void alphabetize()
 //int operator[](int index);
 //Assessment& clone()
+
+bool Assessment::isLeaf()
+{
+	return false;
+}
+
+void Assessment::displayList(QListWidget* listWidget)
+{
+    listWidget->clear();
+    listWidget->addItem(QString::fromStdString(name));
+    for (iter = opps.begin(); iter != opps.end(); iter++)
+    {
+        listWidget->addItem(QString::fromStdString((*iter)->getAssessName()));
+    }
+}
+
+///@todo complete this!
+void Assessment::listDetail(QListWidget* listWidget)
+{
+
+}

@@ -5,6 +5,7 @@
 #include "Opportunity.h"
 #include <string>
 #include <list>
+#include <QListWidget>
 
 using namespace std;
 
@@ -41,6 +42,7 @@ class Assessment : public AbstractAssessment
 		float getMark();
 		float getTotal();
 		//float getWeight();	in parent class
+		int getSize();
 		AbstractAssessment * getAssessment(string name);	
 
 		float calculateTotalMark();
@@ -50,7 +52,9 @@ class Assessment : public AbstractAssessment
 		
 		//
 		void print();
-		string toString(int n);		
+		string toString(int n);
+		void listAssessments();		
+		void writeToFile(fstream &file);
 		//if the opps are equal weight---maybe make a state boolean variable
 			//and a separate function to divide it evenly
 			//and have a total weight
@@ -59,6 +63,11 @@ class Assessment : public AbstractAssessment
 		//void alphabetize();
 		//int operator[](int index);
 		//Assessment& clone()
+		
+		bool isLeaf();
+        void displayList(QListWidget* listWidget);
+        void listDetail(QListWidget* listWidget);
+
 };
 
 
