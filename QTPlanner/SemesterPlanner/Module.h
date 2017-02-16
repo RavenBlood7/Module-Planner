@@ -4,8 +4,11 @@
 #include "Assessment.h"
 #include "Opportunity.h"
 #include <string>
+#include <iomanip>
 #include <fstream>
 #include <QListWidget>
+#include <QLabel>
+#include <QDoubleSpinBox>
 
 using namespace std;
 
@@ -59,8 +62,8 @@ class Module
 		//void cvtOppToGroup(string name);
 		//Module clone();
 		//
-        void displayList(QListWidget* listWidget);
-        void listDetail(QListWidget* listWidget);
+        void displayList(QWidget* wgtNav);
+        void listDetail(QWidget* wgtDetail);
 };
 
 

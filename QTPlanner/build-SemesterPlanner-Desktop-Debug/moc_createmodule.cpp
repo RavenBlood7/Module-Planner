@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_createModule_t {
-    QByteArrayData data[3];
-    char stringdata[37];
+    QByteArrayData data[8];
+    char stringdata[113];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,10 +30,17 @@ struct qt_meta_stringdata_createModule_t {
 static const qt_meta_stringdata_createModule_t qt_meta_stringdata_createModule = {
     {
 QT_MOC_LITERAL(0, 0, 12),
-QT_MOC_LITERAL(1, 13, 21),
-QT_MOC_LITERAL(2, 35, 0)
+QT_MOC_LITERAL(1, 13, 13),
+QT_MOC_LITERAL(2, 27, 0),
+QT_MOC_LITERAL(3, 28, 3),
+QT_MOC_LITERAL(4, 32, 32),
+QT_MOC_LITERAL(5, 65, 4),
+QT_MOC_LITERAL(6, 70, 20),
+QT_MOC_LITERAL(7, 91, 20)
     },
-    "createModule\0on_pushButton_clicked\0\0"
+    "createModule\0displayProper\0\0arg\0"
+    "on_cbxChoice_currentIndexChanged\0arg1\0"
+    "on_btnCreate_clicked\0on_btnCancel_clicked\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -43,7 +50,7 @@ static const uint qt_meta_data_createModule[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -51,9 +58,15 @@ static const uint qt_meta_data_createModule[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x08,
+       1,    1,   34,    2, 0x08,
+       4,    1,   37,    2, 0x08,
+       6,    0,   40,    2, 0x08,
+       7,    0,   41,    2, 0x08,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -64,11 +77,13 @@ void createModule::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     if (_c == QMetaObject::InvokeMetaMethod) {
         createModule *_t = static_cast<createModule *>(_o);
         switch (_id) {
-        case 0: _t->on_pushButton_clicked(); break;
+        case 0: _t->displayProper((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 1: _t->on_cbxChoice_currentIndexChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 2: _t->on_btnCreate_clicked(); break;
+        case 3: _t->on_btnCancel_clicked(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObject createModule::staticMetaObject = {
@@ -96,13 +111,13 @@ int createModule::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 4;
     }
     return _id;
 }

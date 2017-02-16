@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include "Planner.h"
 #include "Navigator.h"
+#include "createmodule.h"
+#include "deleteassess.h"
+#include "editassess.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,16 +22,23 @@ public:
 
     Planner* plan;
     Navigator* nav;
+    createModule* createWindow;
 
 private slots:
 
-    void on_listWidget_clicked(const QModelIndex &index);
+    void on_btnBack_clicked();
 
-    void on_pushButton_clicked();
+    void on_lwgtAssess_doubleClicked(const QModelIndex &index);
 
-    void on_pushButton_2_clicked();
+    void on_lwgtAssess_clicked(const QModelIndex &index);
 
-    void on_listWidget_doubleClicked(const QModelIndex &index);
+    void on_sedMark_editingFinished();
+
+    void showContextMenu(const QPoint&);
+
+    void editAssess();
+    void deleteAssess();
+    void createAssess();
 
 private:
     Ui::MainWindow *ui;

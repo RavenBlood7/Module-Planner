@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditAssess</class>
+ <widget class="QWidget" name="EditAssess">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>295</width>
+    <height>251</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../../Desktop/Raven-on-red.png</normaloff>../../../../../Desktop/Raven-on-red.png</iconset>
+  </property>
+  <widget class="QPushButton" name="btnOK">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>200</y>
+     <width>91</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCancel">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>200</y>
+     <width>91</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edtName">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>50</y>
+     <width>171</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>DEF 111</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="wgtAssess" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>80</y>
+     <width>351</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>62</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Total:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Mark:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Weight:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="sbxWeight_2">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>10</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="sbxMark">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>40</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="sbxTotal">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>70</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <double>10000.000000000000000</double>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>60</y>
+     <width>62</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Name:</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="wgtAssessGroup" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>80</y>
+     <width>291</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Weight:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="sbxWeight">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>10</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <double>1000.000000000000000</double>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="wgtModule" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>80</y>
+     <width>251</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>81</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pass Mark:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Exam Entrance:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cbxPeriod">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>10</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>S1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>S2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Year</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Q1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Q2</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Q3</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Q4</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Other</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Time Period:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="sbxExamEnt">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>40</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <double>100.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="sbxPassMark">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>70</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

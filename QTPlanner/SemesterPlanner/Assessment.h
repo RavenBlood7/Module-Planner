@@ -4,8 +4,8 @@
 #include "AbstractAssessment.h"
 #include "Opportunity.h"
 #include <string>
+#include <iomanip>
 #include <list>
-#include <QListWidget>
 
 using namespace std;
 
@@ -65,8 +65,8 @@ class Assessment : public AbstractAssessment
 		//Assessment& clone()
 		
 		bool isLeaf();
-        void displayList(QListWidget* listWidget);
-        void listDetail(QListWidget* listWidget);
+        void displayList(QWidget* wgtNav);
+        void listDetail(QWidget* wgtDetail);
 
 };
 

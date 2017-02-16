@@ -5,6 +5,8 @@
 #include <list>
 #include <fstream>
 #include <QListWidget>
+#include <QLabel>
+#include <QDoubleSpinBox>
 
 using namespace std;
 
@@ -67,7 +69,7 @@ class AbstractAssessment
 		//Assessment& clone()
 		
 		virtual bool isLeaf() = 0;
-        virtual void listDetail(QListWidget* listWidget) = 0;
+        virtual void listDetail(QWidget* wgtDetail) = 0;
 };
 
 

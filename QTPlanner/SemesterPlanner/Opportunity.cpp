@@ -107,7 +107,46 @@ bool Opportunity::isLeaf()
 }
 
 ///@todo complete this!
-void Opportunity::listDetail(QListWidget* listWidget)
+void Opportunity::listDetail(QWidget* wgtDetail)
 {
+    stringstream outString;
+    QListWidget* listTitles = wgtDetail->findChild<QListWidget*>("lwgtTitles");
+    QListWidget* listValues = wgtDetail->findChild<QListWidget*>("lwgtValues");
+    wgtDetail->findChild<QDoubleSpinBox*>("sedMark")->show();
+    wgtDetail->findChild<QDoubleSpinBox*>("sedMark")->setValue(getMark());
+    wgtDetail->findChild<QDoubleSpinBox*>("sedMark")->setMaximum(getTotal());
+    wgtDetail->findChild<QLabel*>("lblName")->show();
+    wgtDetail->findChild<QLabel*>("lblMark")->show();
+    wgtDetail->findChild<QLabel*>("lblTotal")->show();
+        outString << " / " << getTotal();
+    wgtDetail->findChild<QLabel*>("lblTotal")->setText(QString::fromStdString(outString.str()));
+    wgtDetail->findChild<QLabel*>("lblName")->setText(QString::fromStdString(getAssessName()));
+    listTitles->clear();
+    listValues->clear();
 
+    listTitles->addItem(QString::fromStdString("Current Mark:"));
+            outString.str("");
+            outString << fixed << setprecision(2) << getPercentage() << "%";
+    listValues->addItem(QString::fromStdString(outString.str()));
+
+    listTitles->addItem(QString::fromStdString("Weighted:"));
+            outString.str("");
+            outString << fixed << setprecision(2) << getWeightedMark() << " / " << getWeight();
+    listValues->addItem(QString::fromStdString(outString.str()));
+
+    /*
+    stringstream outString;
+    listWidget->clear();
+    listWidget->addItem(QString::fromStdString("Name:\t" + name));
+    listWidget->addItem(QString::fromStdString("---------------"));
+            outString << "Marks:\t" << getPercentage() << "%";
+    listWidget->addItem(QString::fromStdString(outString.str()));
+    outString.str("");
+    outString << "Weighted:\t" << getWeightedMark() << "/" << getWeight();
+listWidget->addItem(QString::fromStdString(outString.str()));
+outString.str("");
+outString << "\t" << getMark() << "/" << getTotal();
+listWidget->addItem(QString::fromStdString(outString.str()));
+    listWidget->addItem(QString::fromStdString("---------------"));
+    */
 }

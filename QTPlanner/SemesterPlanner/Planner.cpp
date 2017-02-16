@@ -30,12 +30,12 @@ bool Planner::addModule(string name, string timePeriod,	//defaults?
 	newItem->setTimePeriod(timePeriod);
 	newItem->setExamEntranceMark(EEM);
 	newItem->setPassMark(passMark);
-/* use as default/beginning assessments	
+/* use as default/beginning assessments
 	newItem->addOpportunity("Exam", 50);
 	newItem->addAssessment("Semester Mark", 50);
 	((Assessment*) newItem->getAssessment("Semester Mark"))->addOpportunity("ST1", 100, 50);
 	((Assessment*) newItem->getAssessment("Semester Mark"))->addOpportunity("ST2", 100, 50);
-*/	
+*/
 	iter = modules.begin();	
 	//if list isempty
 	if (modules.empty())
@@ -45,7 +45,7 @@ bool Planner::addModule(string name, string timePeriod,	//defaults?
 	else
 	{
 		//else iterate through list, find place, insert
-		while (iter != modules.end() && (*iter)->getName() < name)
+        while (iter != modules.end() && (*iter)->getName() < name)
 		{		
 			if ((*iter)->getName() == name)
 			{
@@ -54,6 +54,13 @@ bool Planner::addModule(string name, string timePeriod,	//defaults?
 			}
 			iter++;
 		}
+        //////////
+        if ((*iter)->getName() == name)
+        {
+            delete newItem;
+            return false;
+        }
+        //////////
 		if (iter == modules.end())
 		{
 			modules.push_back(newItem);
@@ -205,12 +212,26 @@ void Planner::listModules()
 	}		
 }
 
-void Planner::displayList(QListWidget* listWidget)
+void Planner::displayList(QWidget* wgtNav)
 {
+    stringstream outString;
+    QListWidget* listWidget = wgtNav->findChild<QListWidget*>("lwgtAssess");
+    QListWidget* listPercent = wgtNav->findChild<QListWidget*>("lwgtPercent");
     listWidget->clear();
-    listWidget->addItem(QString::fromStdString("ROOT"));
+    listPercent->clear();
+    for (iter = modules.begin(); iter != modules.end(); iter++)
+    {
+        listWidget->addItem(QString::fromStdString((*iter)->getName()));
+        outString.str("");
+        outString << fixed << setprecision(2) << (*iter)->calcPercentage() << "%";
+        listPercent->addItem(QString::fromStdString(outString.str()));
+    }
+    /*
+    listWidget->clear();
+   // listWidget->addItem(QString::fromStdString("ROOT"));
     for (iter = modules.begin(); iter != modules.end(); iter++)
     {
         listWidget->addItem(QString::fromStdString((*iter)->getName()));
     }
+    */
 }

@@ -137,48 +137,336 @@ void Navigator::display()
     }
 }
 
-void Navigator::displayList(QListWidget* listWidget)
+void Navigator::displayList(QWidget* wgtNav)
 {
     if (isAtRoot())
     {
-        plan->displayList(listWidget);
+        wgtNav->findChild<QLabel*>("lblCurMod")->setText(QString::fromStdString(""));
+        plan->displayList(wgtNav);
     }
     else if (isAtModule())
     {
-        curModule->displayList(listWidget);
+        wgtNav->findChild<QLabel*>("lblCurMod")->setText(QString::fromStdString(curModule->getName()));
+        curModule->displayList(wgtNav);
     }
     else
     {
-        ((Assessment*)curAssess)->displayList(listWidget);
+        wgtNav->findChild<QLabel*>("lblCurMod")->setText(QString::fromStdString(curModule->getName()));
+        ((Assessment*)curAssess)->displayList(wgtNav);
     }
 }
 
-void Navigator::listDetail(string name, QListWidget* listWidget)
+void Navigator::listDetail(string name, QWidget* wgtDetail)
 {
-    if (isAtModule())
+    if (isAtRoot())
+    {
+        Module* temp = plan->getModule(name);
+        if (temp)
+            temp->listDetail(wgtDetail);
+    }
+    else if (isAtModule())
     {
         if (name == curModule->getName())
         {
-            curModule->listDetail(listWidget);
+            curModule->listDetail(wgtDetail);
         }
         else
         {
          AbstractAssessment* temp = curModule->getAssessment(name);
          if (temp)
-             temp->listDetail(listWidget);
+             temp->listDetail(wgtDetail);
         }
     }
     else
     {
         if (name == curAssess->getAssessName())
         {
-            curAssess->listDetail(listWidget);
+            curAssess->listDetail(wgtDetail);
         }
         else
         {
          AbstractAssessment* temp = curAssess->getAssessment(name);
          if (temp)
-             temp->listDetail(listWidget);
+             temp->listDetail(wgtDetail);
         }
     }
 }
+
+void Navigator::updateMark(string name, float newMark)
+{
+    if (isAtModule())
+    {
+        ((Opportunity*) curModule->getAssessment(name))->setMark(newMark);
+    }
+    else
+    {
+        ((Opportunity*) curAssess->getAssessment(name))->setMark(newMark);
+    }
+
+}
+
+bool Navigator::createModule(string name, string period, float EEM, float passMark)
+{
+    if (!isAtRoot()) return false;
+    bool worked = plan->addModule(name, period, EEM, passMark);
+
+    if (worked)
+    {
+        Module* newItem = plan->getModule(name);
+        if (newItem)
+        {
+            newItem->addOpportunity("Exam", 50);
+            newItem->addAssessment("Semester Mark", 50);
+            ((Assessment*) newItem->getAssessment("Semester Mark"))->addOpportunity("ST1", 100, 50);
+            ((Assessment*) newItem->getAssessment("Semester Mark"))->addOpportunity("ST2", 100, 50);
+        }
+    }
+   return worked;
+}
+
+bool Navigator::createAssessment(string name, float weight, string subNames, int numOfSubs)
+{
+    bool worked = false;
+    if (isAtRoot())
+    {
+        return false;
+    }
+    else if (isAtModule())
+    {
+        worked = curModule->addAssessment(name, weight, numOfSubs);
+        if (worked)
+        {
+            Assessment* temp = (Assessment*) curModule->getAssessment(name);
+            if (!temp) return false;
+            else
+            {
+                stringstream subName;
+                for (int i = 1; i <= numOfSubs; i++)
+                {
+                    subName.str("");
+                    subName << subNames << i;
+                    temp->setOpName("sub" + temp->getAssessName(), subName.str());
+                }
+                return true;
+            }
+        }
+    }
+    else
+    {
+        worked = curAssess->addAssessment(name, numOfSubs, weight);
+        if (worked)
+        {
+            Assessment* temp = (Assessment*) curAssess->getAssessment(name);
+            if (!temp) return false;
+            else
+            {
+                stringstream subName;
+                for (int i = 1; i <= numOfSubs; i++)
+                {
+                    subName.str("");
+                    subName << subNames << i;
+                    temp->setOpName("sub" + temp->getAssessName(), subName.str());
+                }
+                return true;
+            }
+        }
+    }
+}
+
+bool Navigator::createOpportunity(string name, float weight, float mark, float total)
+{
+    if (isAtRoot())
+    {
+        return false;
+    }
+    else if (isAtModule())
+    {
+        curModule->addOpportunity(name, weight);
+        Opportunity* temp = (Opportunity*) curModule->getAssessment(name);
+        if (!temp) return false;
+        else
+        {
+            temp->setMark(mark);
+            temp->setTotal(total);
+        }
+        return true;
+    }
+    else
+    {
+        curAssess->addOpportunity(name, weight);
+        Opportunity* temp = (Opportunity*) curAssess->getAssessment(name);
+        if (!temp) return false;
+        else
+        {
+            temp->setMark(mark);
+            temp->setTotal(total);
+        }
+        return true;
+    }
+}
+
+bool Navigator::deleteAssess(string name)
+{
+    if (isAtRoot())
+    {
+        return plan->removeModule(name);
+    }
+    else if (isAtModule())
+    {
+        if (curModule->getName() == name)
+            return plan->removeModule(name);
+        else
+            curModule->removeAssessment(name);
+    }
+    else
+    {
+        if (curAssess->getAssessName() == name)
+            return plan->removeModule(name);
+        else
+            curAssess->removeOpportunity(name);
+    }
+}
+
+bool Navigator::isModule(string name)
+{
+    if (plan->getModule(name) && isAtRoot())
+        return true;
+    else return false;
+}
+
+bool Navigator::isAssessment(string name)
+{
+    if (isAtRoot())
+    {
+        return false;
+    }
+    else if (isAtModule())
+    {
+        AbstractAssessment* temp = curModule->getAssessment(name);
+        if (temp)
+        {
+            return !(temp->isLeaf());
+        }
+        else return false;
+
+    }
+    else
+    {
+        AbstractAssessment* temp = curAssess->getAssessment(name);
+        if (temp)
+        {
+            return !(temp->isLeaf());
+        }
+        else return false;
+    }
+}
+
+void Navigator::loadEdit(string name, QWidget* edtWidget)
+{
+    if (isModule(name))
+    {
+        Module* temp = plan->getModule(name);
+        if (temp)
+        {
+            edtWidget->findChild<QComboBox*>("cbxPeriod")->setCurrentText(QString::fromStdString(temp->getTimePeriod()));
+            edtWidget->findChild<QDoubleSpinBox*>("sbxExamEnt")->setValue((double) temp->getExamEntranceMark());
+            edtWidget->findChild<QDoubleSpinBox*>("sbxPassMark")->setValue((double) temp->getPassMark());
+        }
+    }
+    else if (isAssessment(name))
+    {
+        if (isAtModule())
+        {
+            Assessment* temp = (Assessment*) curModule->getAssessment(name);
+            if (temp)
+                edtWidget->findChild<QDoubleSpinBox*>("sbxWeight")->setValue((double) temp->getWeight());
+        }
+        else
+        {
+            Assessment* temp = (Assessment*) curAssess->getAssessment(name);
+            if (temp)
+                edtWidget->findChild<QDoubleSpinBox*>("sbxWeight")->setValue((double) temp->getWeight());
+        }
+
+    }
+    else
+    {
+        if (isAtModule())
+        {
+            Opportunity* temp = (Opportunity*) curModule->getAssessment(name);
+            if (temp)
+            {
+                edtWidget->findChild<QDoubleSpinBox*>("sbxWeight_2")->setValue((double) temp->getWeight());
+                edtWidget->findChild<QDoubleSpinBox*>("sbxMark")->setValue((double) temp->getMark());
+                edtWidget->findChild<QDoubleSpinBox*>("sbxTotal")->setValue((double) temp->getTotal());
+            }
+        }
+        else
+        {
+            Opportunity* temp = (Opportunity*) curAssess->getAssessment(name);
+            if (temp)
+            {
+                edtWidget->findChild<QDoubleSpinBox*>("sbxWeight_2")->setValue((double) temp->getWeight());
+                edtWidget->findChild<QDoubleSpinBox*>("sbxMark")->setValue((double) temp->getMark());
+                edtWidget->findChild<QDoubleSpinBox*>("sbxTotal")->setValue((double) temp->getTotal());
+            }
+        }
+
+    }
+}
+
+void Navigator::editModule(string name, string newName, string TP, float EEM, float PM)
+{
+    Module* temp = plan->getModule(name);
+    if (temp)
+    {
+        temp->setName(newName);
+        temp->setTimePeriod(TP);
+        temp->setExamEntranceMark(EEM);
+        temp->setPassMark(PM);
+    }
+}
+
+void Navigator::editAssessGroup(string name, string newName, float weight)
+{
+    Assessment* temp = 0;
+    if (!isAtRoot())
+    {
+        if (isAtModule())
+            temp = (Assessment*) curModule->getAssessment(name);
+        else
+            temp = (Assessment*) curAssess->getAssessment(name);
+
+        if (temp)
+        {
+            temp->setAssessName(newName);
+            temp->setWeight(weight);
+        }
+    }
+}
+
+void Navigator::editAssess(string name, string newName, float weight, float mark, float total)
+{
+    Opportunity* temp = 0;
+    if (!isAtRoot())
+    {
+        if (isAtModule())
+            temp = (Opportunity*) curModule->getAssessment(name);
+        else
+            temp = (Opportunity*) curAssess->getAssessment(name);
+
+        if (temp)
+        {
+            temp->setAssessName(newName);
+            temp->setWeight(weight);
+            temp->setMark(mark);
+            temp->setTotal(total);
+        }
+    }
+}
+
+void Navigator::save()
+{
+    plan->saveToFile();
+}
+

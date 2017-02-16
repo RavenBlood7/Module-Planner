@@ -1,6 +1,7 @@
 #include "Module.h"
 
 #include <iostream>
+#include <sstream>
 
 Module::Module()
 {
@@ -46,14 +47,14 @@ bool Module::addAssessment(string name, float weight, int numOfSubs)
 	{
 		//else iterate through list, find place, insert
 		while (iter != assess.end() && (*iter)->getAssessName() < name)
-		{		
-			if ((*iter)->getAssessName() == name)
-			{
-				delete newItem;
-				return false;
-			}
+        {
 			iter++;
 		}
+        if ((*iter)->getAssessName() == name)
+        {
+            delete newItem;
+            return false;
+        }
 		if (iter == assess.end())
 		{
 			assess.push_back(newItem);
@@ -82,13 +83,13 @@ bool Module::addAssessment(string name, float weight)
 		//else iterate through list, find place, insert
 		while (iter != assess.end() && (*iter)->getAssessName() < name)
 		{		
-			if ((*iter)->getAssessName() == name)
-			{
-				delete newItem;
-				return false;
-			}
-			iter++;
+            iter++;
 		}
+        if ((*iter)->getAssessName() == name)
+        {
+            delete newItem;
+            return false;
+        }
 		if (iter == assess.end())
 		{
 			assess.push_back(newItem);
@@ -116,13 +117,13 @@ bool Module::addOpportunity(string name, float weight)
 		//else iterate through list, find place, insert
 		while (iter != assess.end() && (*iter)->getAssessName() < name)
 		{		
-			if ((*iter)->getAssessName() == name)
-			{
-				delete newItem;
-				return false;
-			}
 			iter++;
 		}
+        if ((*iter)->getAssessName() == name)
+        {
+            delete newItem;
+            return false;
+        }
 		if (iter == assess.end())
 		{
 			assess.push_back(newItem);
@@ -139,13 +140,13 @@ bool Module::removeAssessment(string name)
 {
 	for (iter = assess.begin(); iter != assess.end(); iter++)
 	{
-		if ((*iter)->getAssessName() == name)
-		{		
-			delete *iter;
-			assess.erase(iter);
-			return true;
-		}
-	}	
+        if ((*iter)->getAssessName() == name)
+        {
+            delete *iter;
+            assess.erase(iter);
+            return true;
+        }
+    }
 	return false;	
 }
 
@@ -326,26 +327,70 @@ void Module::writeToFile(fstream &file)
 	}	
 }
 
-void Module::displayList(QListWidget* listWidget)
+void Module::displayList(QWidget* wgtNav)
 {
+    stringstream outString;
+    QListWidget* listWidget = wgtNav->findChild<QListWidget*>("lwgtAssess");
+    QListWidget* listPercent = wgtNav->findChild<QListWidget*>("lwgtPercent");
     listWidget->clear();
+    listPercent->clear();
     listWidget->addItem(QString::fromStdString(name));
+    outString << fixed << setprecision(2) << calcPercentage() << "%";
+    listPercent->addItem(QString::fromStdString(outString.str()));
+    listWidget->addItem("------------------------");
+    listPercent->addItem("---");
     for (iter = assess.begin(); iter != assess.end(); iter++)
     {
         listWidget->addItem(QString::fromStdString((*iter)->getAssessName()));
+        outString.str("");
+        outString << fixed << setprecision(2) << (*iter)->getPercentage() << "%";
+        listPercent->addItem(QString::fromStdString(outString.str()));
     }
 }
 
-///@todo complete this!
-void Module::listDetail(QListWidget* listWidget)
+void Module::listDetail(QWidget* wgtDetail)
 {
-    listWidget->clear();
-    listWidget->addItem(QString::fromStdString("Name:\t" + name));
-    listWidget->addItem(QString::fromStdString(":\t" + name));
-    listWidget->addItem(QString::fromStdString("Name: " + name));
-    listWidget->addItem(QString::fromStdString("Name: " + name));
-    listWidget->addItem(QString::fromStdString("Name: " + name));
-    listWidget->addItem(QString::fromStdString("Name: " + name));
+    QListWidget* listTitles = wgtDetail->findChild<QListWidget*>("lwgtTitles");
+    QListWidget* listValues = wgtDetail->findChild<QListWidget*>("lwgtValues");
+    wgtDetail->findChild<QLabel*>("lblName")->show();
+    wgtDetail->findChild<QDoubleSpinBox*>("sedMark")->hide();
+    wgtDetail->findChild<QLabel*>("lblMark")->hide();
+    wgtDetail->findChild<QLabel*>("lblTotal")->hide();
+    wgtDetail->findChild<QLabel*>("lblName")->setText(QString::fromStdString(getName()));
+    stringstream outString;
+    listTitles->clear();
+    listValues->clear();
+
+    listTitles->addItem(QString::fromStdString("Current Mark:"));
+            outString << fixed << setprecision(2) << calcPercentage() << "%";
+    listValues->addItem(QString::fromStdString(outString.str()));
+
+    listTitles->addItem(QString::fromStdString("Weighted:"));
+            outString.str("");
+            outString << fixed << setprecision(2) << getWeightedMark() << "/" << getTotalWeight();
+    listValues->addItem(QString::fromStdString(outString.str()));
+
+    listTitles->addItem(QString::fromStdString("info:"));
+    listValues->addItem(QString::fromStdString(""));
+
+    listTitles->addItem(QString::fromStdString("   Time Period:"));
+    listValues->addItem(QString::fromStdString(getTimePeriod()));
+
+    listTitles->addItem(QString::fromStdString("   Exam Entrance:"));
+            outString.str("");
+            outString << fixed << setprecision(2) << getExamEntranceMark();
+    listValues->addItem(QString::fromStdString(outString.str()));
+
+    listTitles->addItem(QString::fromStdString("   PassMark:"));
+            outString.str("");
+            outString << fixed << setprecision(2) << getPassMark();
+    listValues->addItem(QString::fromStdString(outString.str()));
+
+    //Needed in exam to:
+        //pass:
+        //sup:
+        //distinct
+
 }
 
 //other

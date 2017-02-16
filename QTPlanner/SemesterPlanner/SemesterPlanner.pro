@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     Opportunity.cpp \
     Module.cpp \
     Planner.cpp \
-    Navigator.cpp
+    Navigator.cpp \
+    deleteassess.cpp \
+    editassess.cpp
 
 HEADERS  += mainwindow.h \
     createmodule.h \
@@ -28,8 +30,11 @@ HEADERS  += mainwindow.h \
     Opportunity.h \
     Module.h \
     Planner.h \
-    Navigator.h
+    Navigator.h \
+    deleteassess.h \
+    editassess.h
 
 FORMS    += mainwindow.ui \
-    createModule.ui \
-    createmodule.ui
+    createmodule.ui \
+    deleteassess.ui \
+    editassess.ui

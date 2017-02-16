@@ -5,6 +5,8 @@
 //#include "Navigator.h"	//forward declaration?
 class Navigator;
 #include <fstream>
+#include <sstream>
+#include <iomanip>
 
 #include <QListWidget>
 
@@ -15,13 +17,14 @@ class Planner
 		list<Module*>::iterator iter;
 		fstream file;
 	
-		void loadFromFile();
-		void saveToFile();
+        void loadFromFile();
 		void	populateAssessment(Assessment* cur,
 					int numSubAssess, fstream &file);			
 	public:
 		Planner();
 		~Planner();
+
+        void saveToFile();
 	
 		bool addModule(string name, string timePeriod,
 			float EEM, float passMark);
@@ -31,7 +34,7 @@ class Planner
 		Navigator* createNavigator();
 		
 		void listModules();
-        void displayList(QListWidget* listWidget);
+        void displayList(QWidget* wgtNav);
 	
 		//clone?
 		//Module& operator[]();

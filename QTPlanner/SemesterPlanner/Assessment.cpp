@@ -64,13 +64,13 @@ bool Assessment::addOpportunity(string name, float total, float weight)
 		//else iterate through list, find place, insert
 		while (iter != opps.end() && (*iter)->getAssessName() < name)
 		{		
-			if ((*iter)->getAssessName() == name)
-			{
-				delete newItem;
-				return false;
-			}
 			iter++;
 		}
+        if ((*iter)->getAssessName() == name)
+        {
+            delete newItem;
+            return false;
+        }
 		if (iter == opps.end())
 		{
 			opps.push_back(newItem);
@@ -98,13 +98,13 @@ bool Assessment::addOpportunity(string name, float weight)
 		//else iterate through list, find place, insert
 		while (iter != opps.end() && (*iter)->getAssessName() < name)
 		{		
-			if ((*iter)->getAssessName() == name)
-			{
-				delete newItem;
-				return false;
-			}
 			iter++;
 		}
+        if ((*iter)->getAssessName() == name)
+        {
+            delete newItem;
+            return false;
+        }
 		if (iter == opps.end())
 		{
 			opps.push_back(newItem);
@@ -132,13 +132,13 @@ bool Assessment::addAssessment(string name, int numOfSubs, float groupWeight)
 		//else iterate through list, find place, insert
 		while (iter != opps.end() && (*iter)->getAssessName() < name)
 		{		
-			if ((*iter)->getAssessName() == name)
-			{
-				delete newItem;
-				return false;
-			}
 			iter++;
 		}
+        if ((*iter)->getAssessName() == name)
+        {
+            delete newItem;
+            return false;
+        }
 		if (iter == opps.end())
 		{
 			opps.push_back(newItem);
@@ -166,13 +166,13 @@ bool Assessment::addAssessment(string name, float groupWeight)
 		//else iterate through list, find place, insert
 		while (iter != opps.end() && (*iter)->getAssessName() < name)
 		{		
-			if ((*iter)->getAssessName() == name)
-			{
-				delete newItem;
-				return false;
-			}
 			iter++;
 		}
+        if ((*iter)->getAssessName() == name)
+        {
+            delete newItem;
+            return false;
+        }
 		if (iter == opps.end())
 		{
 			opps.push_back(newItem);
@@ -404,18 +404,47 @@ bool Assessment::isLeaf()
 	return false;
 }
 
-void Assessment::displayList(QListWidget* listWidget)
+void Assessment::displayList(QWidget* wgtNav)
 {
+    stringstream outString;
+    QListWidget* listWidget = wgtNav->findChild<QListWidget*>("lwgtAssess");
+    QListWidget* listPercent = wgtNav->findChild<QListWidget*>("lwgtPercent");
+
     listWidget->clear();
+    listPercent->clear();
     listWidget->addItem(QString::fromStdString(name));
+    outString << fixed << setprecision(2) << getPercentage() << "%";
+    listPercent->addItem(QString::fromStdString(outString.str()));
+    listWidget->addItem("------------------------");
+    listPercent->addItem("---");
     for (iter = opps.begin(); iter != opps.end(); iter++)
     {
         listWidget->addItem(QString::fromStdString((*iter)->getAssessName()));
+        outString.str("");
+        outString << fixed << setprecision(2) << (*iter)->getPercentage() << "%";
+        listPercent->addItem(QString::fromStdString(outString.str()));
     }
 }
 
-///@todo complete this!
-void Assessment::listDetail(QListWidget* listWidget)
+void Assessment::listDetail(QWidget* wgtDetail)
 {
+    QListWidget* listTitles = wgtDetail->findChild<QListWidget*>("lwgtTitles");
+    QListWidget* listValues = wgtDetail->findChild<QListWidget*>("lwgtValues");
+    wgtDetail->findChild<QDoubleSpinBox*>("sedMark")->hide();
+    wgtDetail->findChild<QLabel*>("lblName")->show();
+    wgtDetail->findChild<QLabel*>("lblMark")->hide();
+    wgtDetail->findChild<QLabel*>("lblTotal")->hide();
+    wgtDetail->findChild<QLabel*>("lblName")->setText(QString::fromStdString(getAssessName()));
+    stringstream outString;
+    listTitles->clear();
+    listValues->clear();
 
+    listTitles->addItem(QString::fromStdString("Current Mark:"));
+            outString << fixed << setprecision(2) << getPercentage() << "%";
+    listValues->addItem(QString::fromStdString(outString.str()));
+
+    listTitles->addItem(QString::fromStdString("Weighted:"));
+            outString.str("");
+            outString << fixed << setprecision(2) << getWeightedMark() << "/" << getWeight();
+    listValues->addItem(QString::fromStdString(outString.str()));
 }
